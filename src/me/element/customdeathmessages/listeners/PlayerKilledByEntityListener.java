@@ -53,6 +53,8 @@ public class PlayerKilledByEntityListener implements Listener {
 						path = "witherboss-messages";
 					} else if (entity == EntityType.ENDER_DRAGON) { // added before supported v
 						path = "dragon-messages";
+					} else if (entity == EntityType.DRAGON_FIREBALL) { // added before supported v
+						path = "dragon-messages";
 					} else if (entity == EntityType.PRIMED_TNT) { // added before supported v
 						path = "tnt-messages";
 					} else if (entity == EntityType.CREEPER) { // added before supported v

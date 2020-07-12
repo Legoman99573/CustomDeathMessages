@@ -14,8 +14,6 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import me.element.customdeathmessages.CustomDeathMessages;
 import me.element.customdeathmessages.enums.VersionEnums;
@@ -39,7 +37,7 @@ public class PlayerDeathListener implements Listener {
 
 		if (victim instanceof Player && killer instanceof Player && plugin.getConfig().getBoolean("enable-pvp-messages"))
 		{
-			victim.sendMessage(new HexChat(plugin).translateHexCodes("#<", ">", plugin.getConfig().getString("victim-message")
+			victim.sendMessage(HexChat.translateHexCodes(plugin.getConfig().getString("victim-message")
 					.replace("%killer%", victim.getName())
 					.replace("%killer-nick%", victim.getDisplayName())
 					.replace("%victim-x%", String.valueOf(victim.getLocation().getBlockX()))
@@ -47,32 +45,12 @@ public class PlayerDeathListener implements Listener {
 					.replace("%victim-z%", String.valueOf(victim.getLocation().getBlockZ()))
 					.replace("%killer-x%", String.valueOf(killer.getLocation().getBlockX()))
 					.replace("%killer-y%", String.valueOf(killer.getLocation().getBlockY()))
-					.replace("%killer-z%", String.valueOf(killer.getLocation().getBlockZ()))));
+					.replace("%killer-z%", String.valueOf(killer.getLocation().getBlockZ())), plugin));
 
 
-			killer.sendMessage(new HexChat(plugin).translateHexCodes("#<", ">", plugin.getConfig().getString("killer-message")
+			killer.sendMessage(HexChat.translateHexCodes(plugin.getConfig().getString("killer-message")
 					.replace("%victim%", victim.getName())
-					.replace("%victim-nick%", victim.getDisplayName())));
-		}
-
-		if (plugin.getConfig().getBoolean("heart-sucker")) 
-		{
-			if (killer.getHealth() < 20 && killer instanceof Player) 
-			{
-				killer.setHealth(20);
-			}
-		}
-
-		if (plugin.getConfig().getBoolean("give-killer-speed")) 
-		{
-			if (killer instanceof Player)
-			{
-				killer.addPotionEffect(new PotionEffect(
-						PotionEffectType.SPEED, 
-						plugin.getConfig().getInt("speed-length-seconds"), 
-						plugin.getConfig().getInt("speed-level")));	
-			}
-
+					.replace("%victim-nick%", victim.getDisplayName()), plugin));
 		}
 
 		double percent = plugin.getConfig().getDouble("drop-head-percentage"); // percent to drop head
@@ -82,8 +60,8 @@ public class PlayerDeathListener implements Listener {
 
 			if (randomDouble <= percent) { // calculate to drop or not
 
-				String headName = new HexChat(plugin).translateHexCodes("#<", ">", plugin.getConfig().getString("head-name")
-								.replace("%victim%", victim.getName()));
+				String headName = HexChat.translateHexCodes(plugin.getConfig().getString("head-name")
+								.replace("%victim%", victim.getName()), plugin);
 
 				if (plugin.getConfig().getBoolean("developer-mode")) // for debugging
 				{
@@ -144,7 +122,7 @@ public class PlayerDeathListener implements Listener {
 								.replace("%killer-y%", String.valueOf(killer.getLocation().getBlockY()))
 								.replace("%killer-z%", String.valueOf(killer.getLocation().getBlockZ()));
 
-						msg = new HexChat(plugin).translateHexCodes("#<", ">", msg);
+						msg = HexChat.translateHexCodes(msg, plugin);
 						event.setDeathMessage(msg);
 
 					} else 
@@ -164,8 +142,9 @@ public class PlayerDeathListener implements Listener {
 								.replace("%killer-x%", String.valueOf(killer.getLocation().getBlockX()))
 								.replace("%killer-y%", String.valueOf(killer.getLocation().getBlockY()))
 								.replace("%killer-z%", String.valueOf(killer.getLocation().getBlockZ()));
-
-						msg = new HexChat(plugin).translateHexCodes("#<", ">", msg);
+						
+						msg = HexChat.translateHexCodes(msg, plugin);
+						
 						event.setDeathMessage(msg);
 					}
 				}	
@@ -184,7 +163,7 @@ public class PlayerDeathListener implements Listener {
 							.replace("%killer-y%", String.valueOf(killer.getLocation().getBlockY()))
 							.replace("%killer-z%", String.valueOf(killer.getLocation().getBlockZ()));
 
-					msg = new HexChat(plugin).translateHexCodes("#<", ">", msg);
+					msg = HexChat.translateHexCodes(msg, plugin);
 					event.setDeathMessage(msg);
 				}
 			} 
@@ -233,7 +212,7 @@ public class PlayerDeathListener implements Listener {
 				{
 					if (plugin.deathMessage.get(victim.getName()) != null)
 					{
-						String msg = new HexChat(plugin).translateHexCodes("#<", ">", plugin.deathMessage.get(victim.getName()));
+						String msg = HexChat.translateHexCodes(plugin.deathMessage.get(victim.getName()), plugin);
 						plugin.deathMessage.clear();
 
 						event.setDeathMessage(msg);
@@ -248,7 +227,7 @@ public class PlayerDeathListener implements Listener {
 								.replace("%victim-x%", String.valueOf(victim.getLocation().getBlockX()))
 								.replace("%victim-y%", String.valueOf(victim.getLocation().getBlockY()))
 								.replace("%victim-z%", String.valueOf(victim.getLocation().getBlockZ()));
-						msg = new HexChat(plugin).translateHexCodes("#<", ">", msg);
+						msg = HexChat.translateHexCodes(msg, plugin);
 						event.setDeathMessage(msg);
 					}
 				}
@@ -262,7 +241,7 @@ public class PlayerDeathListener implements Listener {
 							.replace("%victim-x%", String.valueOf(victim.getLocation().getBlockX()))
 							.replace("%victim-y%", String.valueOf(victim.getLocation().getBlockY()))
 							.replace("%victim-z%", String.valueOf(victim.getLocation().getBlockZ()));
-					msg = new HexChat(plugin).translateHexCodes("#<", ">", msg);
+					msg = HexChat.translateHexCodes(msg, plugin);
 					event.setDeathMessage(msg);
 				}
 			}

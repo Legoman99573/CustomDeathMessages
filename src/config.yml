@@ -1,6 +1,7 @@
 # Enable Update Messages: Toggles update messages on or off.
 enable-update-messages: true
 
+# To use hex colors: &#hex
 # PvP Messages only for when  a player is killed by another player, enabled by default
 # Placeholders for pvp messages: %victim%, %victim-nick%, %killer%, %killer-nick%, %killer-x%, %killer-y%, %killer-z%, %victim-x%, %victim-y%, %victim-z%
 enable-pvp-messages: true
@@ -8,18 +9,10 @@ killer-message: '&e[&cDeathMessages&e] &eYou killed &c%victim%'
 victim-message: '&e[&cDeathMessages&e] &eYou were killed by &c%killer%'
 
 # Toggleable features: set true to enable, false to disable. All features except lightning-effect are false by default.
-# Heart Sucker: resets the players health to 20 when they kill another player.
-# Give Killer Speed: gives the player a customizable level of speed for a customizable amount seconds when they kill another player.
 # Drop Head Percentage: self explanatory, chance of a player head to drop, [0 = 0%, 1 = 100%] 0.5 by default.
 # Do Lightning: creates a lightning effect that will not harm or damage anything when the victim is killed. True by default.
 # Head Name: Sets the name of a head whenever dropped from a player.
-
-give-killer-speed: false
-speed-level: 1
-speed-length-seconds: 5
 head-name: "&c%victim%'s Head"
-
-heart-sucker: false
 do-lightning: true
 
 # Number between 0 and 1
@@ -33,13 +26,13 @@ enable-global-messages: true
 # Placeholders for melee messages: %victim%, %victim-nick%, %killer%, %killer-nick%, %kill-weapon%, %killer-x%, %killer-y%, %killer-z%, %victim-x%, %victim-y%, %victim-z%
 global-pvp-death-messages: 
     - "&c%victim% &ehas been killed by &c%killer%"
-    - "&c%victim% &ewas slain by &c%killer% &eusing [&b%kill-weapon%&e]"
+    - "&c%victim% &ewas slain by &c%killer% &eusing &7[&b%kill-weapon%&7]"
     - "&c%victim% &ehas been put down by &c%killer%"
-    - "&c%victim% &ewas slaughtered by &c%killer% &eusing [&b%kill-weapon%&e]"
-    - "&c%killer% &epulverized &c%victim% &eusing [&b%kill-weapon%&e]"
+    - "&c%victim% &ewas slaughtered by &c%killer% &eusing &7[&b%kill-weapon%&7]"
+    - "&c%killer% &epulverized &c%victim% &eusing &7[&b%kill-weapon%&7]"
     - "&c%victim% &ewas destroyed by &c%killer%&e"
     - "&c%killer% &egave &c%victim% &ethe L"
-    - "&c%victim% &ewas EZ clapped by &c%killer% &eusing [&b%kill-weapon%&e]"
+    - "&c%victim% &ewas EZ clapped by &c%killer% &eusing &7[&b%kill-weapon%&7]"
 
 # Placeholders for melee messages: %victim%, %victim-nick%, %killer%, %killer-nick%, %killer-x%, %killer-y%, %killer-z%, %victim-x%, %victim-y%, %victim-z%
 melee-death-messages:

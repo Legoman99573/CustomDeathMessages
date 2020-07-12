@@ -1,5 +1,6 @@
 package me.element.customdeathmessages.other;
 
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,28 +10,36 @@ import net.md_5.bungee.api.ChatColor;
 
 public class HexChat {
 
-	private CustomDeathMessages plugin;
+	private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
+	private static final char COLOR_CHAR = '\u00A7';
 
-	public HexChat(CustomDeathMessages plugin)
+	public static String translateHexCodes(String message, CustomDeathMessages plugin)
 	{
-		this.plugin = plugin;
+		return translate(HEX_PATTERN, message, plugin);
 	}
 
-	public String translateHexCodes(String startTag, String endTag, String message)
+	public static String translateHexCodes(String startTag, String endTag, String message, CustomDeathMessages plugin)
+	{
+		final Pattern hexPattern = Pattern.compile(startTag + "([a-f0-9]{6})" + endTag);
+		return translate(hexPattern, message, plugin);
+	}
+
+	private static String translate(Pattern hex, String message, CustomDeathMessages plugin)
 	{
 		if (plugin.getServerVersion().getVersionInt() >= VersionEnums.VERSION_116.getVersionInt())
 		{
-			final Pattern pattern = Pattern.compile(startTag + "(\\w{6})" + endTag);
-			
-			Matcher matcher = pattern.matcher(ChatColor.translateAlternateColorCodes('&', message));
-			StringBuffer buffer = new StringBuffer();
-
+			Matcher matcher = hex.matcher(message);
+			StringBuffer buffer = new StringBuffer(message.length() + 4 * 8);
 			while (matcher.find()) 
 			{
-				matcher.appendReplacement(buffer, ChatColor.of('#' + matcher.group(1)).toString());
+				String group = matcher.group(1);
+				matcher.appendReplacement(buffer, COLOR_CHAR + "x" 
+						+ COLOR_CHAR + group.charAt(0) + COLOR_CHAR + group.charAt(1) 
+						+ COLOR_CHAR + group.charAt(2) + COLOR_CHAR + group.charAt(3)
+						+ COLOR_CHAR + group.charAt(4) + COLOR_CHAR + group.charAt(5)
+						);
 			}
-
-			return matcher.appendTail(buffer).toString();
+			return ChatColor.translateAlternateColorCodes('&', matcher.appendTail(buffer).toString());
 		}
 		else
 		{

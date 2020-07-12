@@ -14,8 +14,7 @@ import me.element.customdeathmessages.metrics.Metrics;
 
 public class CustomDeathMessages extends JavaPlugin {
 
-
-	public HashMap<String, String> deathMessage  = new HashMap<String, String>();
+	public HashMap<String, String> deathMessage = new HashMap<String, String>();
 	public boolean hasPAPI;
 
 	@Override
@@ -100,11 +99,3 @@ public class CustomDeathMessages extends JavaPlugin {
 		}
 	}
 }
-
-
-
-
-
-
-
-
