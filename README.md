@@ -9,8 +9,6 @@ CustomDeathMessages is a lightweight, but highly customizable plugin. It comes w
 * Toggleable and configurable global death messages.
 * All death messages (natural causes, mobs, and players) all have their own spot in config which is configurable with multiple messages.
 * Update checker which sends a message when the plugin has an update
-* Toggleable and configurable level of speed for a configurable amount of time when you kill a player.
-* Toggleable feature where the player's health is set back to the max when they kill another player.
 * Toggleable lightning effect when a player is killed.
 * Customizable percent chance for a player to drop their head on death. (Customizable head name)
 * Extensive and very customizable config, see the example below.
