@@ -2,7 +2,6 @@ package me.element.customdeathmessages;
 
 import java.util.HashMap;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.element.customdeathmessages.commands.CustomDeathMessagesCommand;
@@ -15,7 +14,6 @@ import me.element.customdeathmessages.metrics.Metrics;
 public class CustomDeathMessages extends JavaPlugin {
 
 	public HashMap<String, String> deathMessage = new HashMap<String, String>();
-	public boolean hasPAPI;
 
 	@Override
 	public void onEnable()
@@ -64,6 +62,10 @@ public class CustomDeathMessages extends JavaPlugin {
 		{
 			return VersionEnums.VERSION_116;
 		}
+		else if (getServer().getVersion().contains("1.17"))
+		{
+			return VersionEnums.VERSION_117;
+		}
 
 		else return VersionEnums.OTHER_VERSION;
 	}
@@ -77,8 +79,8 @@ public class CustomDeathMessages extends JavaPlugin {
 		metrics.addCustomChart(new Metrics.SimplePie("give_killer_speed",	   () -> getConfig().getBoolean("give-killer-speed") ? "Enabled" : "Disabled" ));
 		metrics.addCustomChart(new Metrics.SimplePie("heart_sucker", 		   () -> getConfig().getBoolean("heart-sucker") ? "Enabled" : "Disabled" ));
 		metrics.addCustomChart(new Metrics.SimplePie("do_lightning", 		   () -> getConfig().getBoolean("do-lightning") ? "Enabled" : "Disabled" ));
-		metrics.addCustomChart(new Metrics.SimplePie("enable_global_messages", () -> getConfig().getBoolean("enable-global-messages") ? "Enabled" : "Disabled" ));  
-		metrics.addCustomChart(new Metrics.SimplePie("enable_pvp_messages",    () -> getConfig().getBoolean("enable-pvp-messages") ? "Enabled" : "Disabled" )); 
+		metrics.addCustomChart(new Metrics.SimplePie("enable_global_messages", () -> getConfig().getBoolean("enable-global-messages") ? "Enabled" : "Disabled" ));
+		metrics.addCustomChart(new Metrics.SimplePie("enable_pvp_messages",    () -> getConfig().getBoolean("enable-pvp-messages") ? "Enabled" : "Disabled" ));
 	}
 
 	public void registerCommandsListeners()
@@ -94,7 +96,7 @@ public class CustomDeathMessages extends JavaPlugin {
 	{
 		if (getServerVersion() == VersionEnums.OTHER_VERSION)
 		{	
-			getLogger().warning(ChatColor.GRAY + "[CustomDeathMessages] " + ChatColor.RED + "This server version is unsupported by CustomDeathMessages. Please update to 1.9 - 1.15 on your server to use this plugin.");
+			getLogger().warning("[CustomDeathMessages] This server version is unsupported by CustomDeathMessages. Please update to 1.9 or above on your server to use this plugin.");
 			getServer().getPluginManager().disablePlugin(this);
 		}
 	}

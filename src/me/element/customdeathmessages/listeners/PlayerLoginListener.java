@@ -26,41 +26,51 @@ public class PlayerLoginListener implements Listener {
 	}
 
 	@EventHandler
-	public void onLogin(PlayerLoginEvent event) {
-
+	public void onLogin(PlayerLoginEvent event) 
+	{
 		if (plugin.getConfig().getBoolean("enable-update-messages"))
 		{
-			new UpdateChecker(plugin, 69605).getVersion(version -> {
-
+			new UpdateChecker(plugin, 69605).getVersion(version ->
+			{
 				if (!plugin.getDescription().getVersion().equalsIgnoreCase(version.replace("v", ""))) 
 				{
 					Player player = event.getPlayer();
 					if (player.hasPermission("cdm.updates"))
 					{
-						player.sendMessage(ChatColor.GRAY + "CustomDeathMessages: " + ChatColor.AQUA + "CustomDeathMessages has a newer version available " + ChatColor.WHITE + "(" + version + ")" + ChatColor.AQUA + ". Please update: https://www.spigotmc.org/resources/customdeathmessages-cdm.69605/");
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8-----------------------------------------------------"));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bCustomDeathMessages: &7New version &f" + version + " &7is available."));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&fhttps://www.spigotmc.org/resources/customdeathmessages-cdm.69605/"));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8-----------------------------------------------------"));
 					}
 				}
 			});
 		}
 	}
 
-	public class UpdateChecker {
-
+	public class UpdateChecker
+	{
 		private Plugin plugin;
 		private int resourceId ;
 
-		public UpdateChecker(Plugin plugin, int resourceId) {
+		public UpdateChecker(Plugin plugin, int resourceId) 
+		{
 			this.plugin = plugin;
 			this.resourceId = resourceId;
 		}
 
-		public void getVersion(final CustomConsumer<String> consumer) {
-			Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
-				try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) {
-					if (scanner.hasNext()) {
+		public void getVersion(final CustomConsumer<String> consumer) 
+		{
+			Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> 
+			{
+				try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId).openStream(); Scanner scanner = new Scanner(inputStream)) 
+				{
+					if (scanner.hasNext()) 
+					{
 						consumer.accept(scanner.next());
 					}
-				} catch (IOException exception) {
+				} 
+				catch (IOException exception) 
+				{
 					this.plugin.getLogger().info("Cannot look for updates: " + exception.getMessage());
 				}
 			});
