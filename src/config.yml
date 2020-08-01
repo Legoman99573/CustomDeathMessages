@@ -135,7 +135,6 @@ witherskeleton-messages:
 witherboss-messages:
     - "&c%victim% &egot his head blown off by the Wither"
     
-    
 dragon-messages:
     - "&c%victim% &egot his guts ripped out by the &d&lEnder Dragon"
     
@@ -164,7 +163,7 @@ shulker-messages:
     - "&c%victim% &edied trying to get some &d&lshulker &eshells"
     
 guardian-messages:
-    - "&c<cictim> &egot killed by a &7&lGuardian... &esomehow?"
+    - "&c%victim% &egot killed by a &7&lGuardian... &esomehow?"
     
 golem-messages:
     - "&c%victim% &emade an &7&lIron Golem &emad"
